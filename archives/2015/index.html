@@ -36,7 +36,8 @@
 
     <body>
       <header>
-        <div>
+        
+<div>
 		
 			<div id="imglogo">
 				<a href="/"><img src="/img/logo.png" alt="Xu Tang&#39;s Homepages" title="Xu Tang&#39;s Homepages"/></a>
@@ -57,8 +58,6 @@
 						<li><a href="/archives">Archives</a></li>
 					
 						<li><a href="/about">About</a></li>
-					
-						<li><a href="/contact">Contact</a></li>
 					
 					<li>
  					
@@ -153,7 +152,7 @@
 	
 	
 	<section class="info">
-		<p> Hello ,I&#39;m Tang Xu at ShanghaiTech University <br/>
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
 			This is my blog,believe it or not.</p>
 	</section>
 	 
@@ -175,7 +174,7 @@
 		<p class="copyright">
 		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
 		
-		<a href="http://takecareofbigboss.github.io/about" target="_blank" title="Xu Tang">Xu Tang</a>
+		<a href="/about" target="_blank" title="Xu Tang">Xu Tang</a>
 		
 		
 		</p>
@@ -233,11 +232,44 @@ $(document).ready(function(){
 
 
 
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"takecareofbigboss"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
 
 
 
 
 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
 
 
 
