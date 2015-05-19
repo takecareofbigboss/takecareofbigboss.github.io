@@ -4,28 +4,31 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>RussianCube | Xu Tang&#39;s Homepages</title>
+    <title>Deep Learning for Object Detection and Segmentation | Xu Tang&#39;s Homepages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xu Tang">
     
 
     
-    <meta name="description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+    <meta name="description" content="slides下载链接地址&amp;emsp;&amp;emsp;这个slides是我和陈思秦在上海科技大学paper reading group组会上面做的presentation。slides中包括了object detection和segmentation的introduction，datasets，related work，evaluation metric以及novel models。其中models主要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RussianCube">
-<meta property="og:url" content="http://takecareofbigboss.github.io/2015/05/11/RussianCube/index.html">
+<meta property="og:title" content="Deep Learning for Object Detection and Segmentation">
+<meta property="og:url" content="http://takecareofbigboss.github.io/2015/05/19/deep-learning/index.html">
 <meta property="og:site_name" content="Xu Tang's Homepages">
-<meta property="og:description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+<meta property="og:description" content="slides下载链接地址&amp;emsp;&amp;emsp;这个slides是我和陈思秦在上海科技大学paper reading group组会上面做的presentation。slides中包括了object detection和segmentation的introduction，datasets，related work，evaluation metric以及novel models。其中models主要">
+<meta property="og:image" content="http://pfile.cn/2n3alp">
+<meta property="og:image" content="http://pfile.cn/6s8rhu">
+<meta property="og:image" content="http://pfile.cn/ifug7m">
+<meta property="og:image" content="http://pfile.cn/93cezj">
+<meta property="og:image" content="http://pfile.cn/33lsjt">
+<meta property="og:image" content="http://pfile.cn/i7yhom">
+<meta property="og:image" content="http://pfile.cn/4ftzif">
+<meta property="og:image" content="http://pfile.cn/gx1hdm">
+<meta property="og:image" content="http://pfile.cn/o5t95v">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RussianCube">
-<meta name="twitter:description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+<meta name="twitter:title" content="Deep Learning for Object Detection and Segmentation">
+<meta name="twitter:description" content="slides下载链接地址&amp;emsp;&amp;emsp;这个slides是我和陈思秦在上海科技大学paper reading group组会上面做的presentation。slides中包括了object detection和segmentation的introduction，datasets，related work，evaluation metric以及novel models。其中models主要">
 
     
     <link rel="alternative" href="/atom.xml" title="Xu Tang&#39;s Homepages" type="application/atom+xml">
@@ -85,14 +88,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/11/RussianCube/" title="RussianCube" itemprop="url">RussianCube</a>
+      <a href="/2015/05/19/deep-learning/" title="Deep Learning for Object Detection and Segmentation" itemprop="url">Deep Learning for Object Detection and Segmentation</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-11T13:32:58.000Z" itemprop="datePublished"> 發表於 2015-05-11</time>
+    <time datetime="2015-05-19T11:13:15.000Z" itemprop="datePublished"> 發表於 2015-05-19</time>
     
   </p>
 </header>
@@ -101,14 +104,18 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块openGL程序："><span class="toc-number">1.</span> <span class="toc-text">俄罗斯方块openGL程序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序声明："><span class="toc-number">2.</span> <span class="toc-text">俄罗斯方块程序声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序链接地址"><span class="toc-number">3.</span> <span class="toc-text">俄罗斯方块程序链接地址</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#slides下载链接地址"><span class="toc-number">1.</span> <span class="toc-text">slides下载链接地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用数据集："><span class="toc-number">1.1.</span> <span class="toc-text">常用数据集：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用评判标准："><span class="toc-number">1.2.</span> <span class="toc-text">常用评判标准：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型示例图："><span class="toc-number">1.3.</span> <span class="toc-text">模型示例图：</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="俄罗斯方块openGL程序：">俄罗斯方块openGL程序：</h2><p>使用本程序需要安装openGL库文件，具体安装教程请看<a href="http://www.cnblogs.com/Linkliu/articles/leanC.html" target="_blank" rel="external">链接</a>。</p>
-<h2 id="俄罗斯方块程序声明：">俄罗斯方块程序声明：</h2><p>由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。</p>
-<p>后期改进也没有什么问题，只不过由于课程比较紧，有很多论文需要看，所以不打算改进了。</p>
-<h2 id="俄罗斯方块程序链接地址"><a href="https://github.com/takecareofbigboss/Russian_cube" target="_blank" rel="external">俄罗斯方块程序链接地址</a></h2>  
+		<h2 id="slides下载链接地址"><a href="http://pan.baidu.com/s/1dDrSKW5" target="_blank" rel="external">slides下载链接地址</a></h2><p>&emsp;&emsp;这个slides是我和陈思秦在上海科技大学paper reading group组会上面做的presentation。slides中包括了object detection和segmentation的introduction，datasets，related work，evaluation metric以及novel models。其中models主要讲解经典的deep learning做object detection模型<a href="http://arxiv.org/pdf/1311.2524.pdf" target="_blank" rel="external">《Rich feature hierarchies for accurate object detection and semantic segmentation》</a>和deep learning做segmentation模型<a href="http://arxiv.org/pdf/1412.0774v1.pdf" target="_blank" rel="external">Feedforward semantic segmentation with zoom-out features</a>。</p>
+<p>&emsp;&emsp;选取几页ppt截图如下：</p>
+<h3 id="常用数据集：">常用数据集：</h3><p><img src="http://pfile.cn/2n3alp" alt=""><br><img src="http://pfile.cn/6s8rhu" alt=""><br><img src="http://pfile.cn/ifug7m" alt=""></p>
+<h3 id="常用评判标准：">常用评判标准：</h3><p><img src="http://pfile.cn/93cezj" alt=""><br><img src="http://pfile.cn/33lsjt" alt=""><br><img src="http://pfile.cn/i7yhom" alt=""></p>
+<h3 id="模型示例图：">模型示例图：</h3><p>hinton2012的经典CNN模型图示：<br><img src="http://pfile.cn/4ftzif" alt=""></p>
+<p>RCNN模型图示：<br><img src="http://pfile.cn/gx1hdm" alt=""></p>
+<p>segmentation模型图示：<br><img src="http://pfile.cn/o5t95v" alt=""></p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -120,7 +127,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://takecareofbigboss.github.io/2015/05/11/RussianCube/" data-title="RussianCube | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  <div data-url="http://takecareofbigboss.github.io/2015/05/19/deep-learning/" data-title="Deep Learning for Object Detection and Segmentation | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,19 +140,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/19/deep-learning/" title="Deep Learning for Object Detection and Segmentation">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Deep Learning for Object Detection and Segmentation</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/10/VALSE2015/"  title="VALSE2015">
+<a href="/2015/05/11/RussianCube/"  title="RussianCube">
  <strong>下一篇：</strong><br/> 
- <span>VALSE2015
+ <span>RussianCube
 </span>
 </a>
 </div>
@@ -154,7 +153,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/11/RussianCube/" data-title="RussianCube" data-url="http://takecareofbigboss.github.io/2015/05/11/RussianCube/"></div>
+	<div class="ds-thread" data-thread-key="2015/05/19/deep-learning/" data-title="Deep Learning for Object Detection and Segmentation" data-url="http://takecareofbigboss.github.io/2015/05/19/deep-learning/"></div>
 </section>
 
 
@@ -164,7 +163,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块openGL程序："><span class="toc-number">1.</span> <span class="toc-text">俄罗斯方块openGL程序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序声明："><span class="toc-number">2.</span> <span class="toc-text">俄罗斯方块程序声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序链接地址"><span class="toc-number">3.</span> <span class="toc-text">俄罗斯方块程序链接地址</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#slides下载链接地址"><span class="toc-number">1.</span> <span class="toc-text">slides下载链接地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用数据集："><span class="toc-number">1.1.</span> <span class="toc-text">常用数据集：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用评判标准："><span class="toc-number">1.2.</span> <span class="toc-text">常用评判标准：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模型示例图："><span class="toc-number">1.3.</span> <span class="toc-text">模型示例图：</span></a></li></ol></li></ol>
  
   </div>
 
