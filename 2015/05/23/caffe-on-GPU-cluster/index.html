@@ -1,0 +1,507 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Caffe on GPU Cluster | Xu Tang&#39;s Homepages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xu Tang">
+    
+
+    
+    <meta name="description" content="FOR ALL SOFTWARE PACKAGE,YOU CAN GOOGLE IT AND DOWNLOAD FROM CORRESPONDING WEBSITE.
+Clone the caffegit clone https://github.com/BVLC/caffe.git
+Before start this tutorial, you should first install pyth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Caffe on GPU Cluster">
+<meta property="og:url" content="http://takecareofbigboss.github.io/2015/05/23/caffe-on-GPU-cluster/index.html">
+<meta property="og:site_name" content="Xu Tang's Homepages">
+<meta property="og:description" content="FOR ALL SOFTWARE PACKAGE,YOU CAN GOOGLE IT AND DOWNLOAD FROM CORRESPONDING WEBSITE.
+Clone the caffegit clone https://github.com/BVLC/caffe.git
+Before start this tutorial, you should first install pyth">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Caffe on GPU Cluster">
+<meta name="twitter:description" content="FOR ALL SOFTWARE PACKAGE,YOU CAN GOOGLE IT AND DOWNLOAD FROM CORRESPONDING WEBSITE.
+Clone the caffegit clone https://github.com/BVLC/caffe.git
+Before start this tutorial, you should first install pyth">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xu Tang&#39;s Homepages" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Xu Tang&#39;s Homepages" title="Xu Tang&#39;s Homepages"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xu Tang&#39;s Homepages">Xu Tang&#39;s Homepages</a></h1>
+				<h2 class="blog-motto">Computer Vision&amp;Deep Learning&amp;Object Detection&amp;Zero-shot Learning</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/Contact-Me">Contact-Me</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:takecareofbigboss.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/23/caffe-on-GPU-cluster/" title="Caffe on GPU Cluster" itemprop="url">Caffe on GPU Cluster</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-23T11:56:17.000Z" itemprop="datePublished"> 發表於 2015-05-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clone_the_caffe"><span class="toc-number">1.</span> <span class="toc-text">Clone the caffe</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Install_python"><span class="toc-number">1.0.1.</span> <span class="toc-text">Install python</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention:"><span class="toc-number">1.1.</span> <span class="toc-text">Attention:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-bashrc_file_setting"><span class="toc-number">2.</span> <span class="toc-text">.bashrc file setting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install_openblas"><span class="toc-number">3.</span> <span class="toc-text">Install openblas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install_all_depend"><span class="toc-number">4.</span> <span class="toc-text">Install all depend</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_cmake"><span class="toc-number">4.1.</span> <span class="toc-text">Install cmake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_Protobuf"><span class="toc-number">4.2.</span> <span class="toc-text">Install Protobuf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_snappy"><span class="toc-number">4.3.</span> <span class="toc-text">Install snappy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_leveldb"><span class="toc-number">4.4.</span> <span class="toc-text">Install leveldb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_OpenCV"><span class="toc-number">4.5.</span> <span class="toc-text">Install OpenCV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_Boost"><span class="toc-number">4.6.</span> <span class="toc-text">Install Boost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_google-glog_[!!!NOT_EASY,_CONFLICT_WITH_THE_GFLAGS_INSTALLED_IN_/USR/LOCAL_BY_ROOT]"><span class="toc-number">4.7.</span> <span class="toc-text">Install google-glog [!!!NOT EASY, CONFLICT WITH THE GFLAGS INSTALLED IN /USR/LOCAL BY ROOT]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_gflags"><span class="toc-number">4.8.</span> <span class="toc-text">Install gflags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_lmdb"><span class="toc-number">4.9.</span> <span class="toc-text">Install lmdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_hdf5"><span class="toc-number">4.10.</span> <span class="toc-text">Install hdf5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_cuDNN"><span class="toc-number">4.11.</span> <span class="toc-text">Install cuDNN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Add_the_path_int_~/-bashrc"><span class="toc-number">5.</span> <span class="toc-text">Add the path int ~/.bashrc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compile_caffe"><span class="toc-number">6.</span> <span class="toc-text">Compile caffe</span></a></li></ol>
+		
+		</div>
+		
+		<p>FOR ALL SOFTWARE PACKAGE,<br>YOU CAN GOOGLE IT AND DOWNLOAD FROM CORRESPONDING WEBSITE.</p>
+<h2 id="Clone_the_caffe">Clone the caffe</h2><pre><code>git clone <span class="string">https:</span><span class="comment">//github.com/BVLC/caffe.git</span>
+</code></pre><p>Before start this tutorial, you should first install python on cpu clusters</p>
+<h4 id="Install_python">Install python</h4><pre><code>cd python2.<span class="number">7.9</span>
+.<span class="regexp">/configure --prefix=/</span>str<span class="regexp">/users/</span>tangxu<span class="regexp">/local/</span> --enable-shared
+make
+make install
+</code></pre><h3 id="Attention:">Attention:</h3><p>&emsp;&emsp;All the path /home/YOURNAME/local should be changed to /str/users/tangxu/local/ if you want to install it on the cpu clusters.<br>&emsp;&emsp;All the path /str/users/tangxu/local/ should be changed to /home/YOURNAME/local if you want to install it on the gpu server.</p>
+<h2 id="-bashrc_file_setting">.bashrc file setting</h2><p>vim .bashrc</p>
+<p>export PATH=/str/users/tangxu/local/bin:$PATH<br>export LD_LIBRARY_PATH=/str/users/tangxu/local/lib:$LD_LIBRARY_PATH</p>
+<p>export PKG_CONFIG_PATH=/str/users/tangxu/local/lib/pkgconfig:$PKG_CONFIG_PATH<br>export PATH=/usr/local/cuda-7.0/bin:$PATH<br>export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH<br>PATH=/str/users/tangxu/local/include:/usr/include:/usr/local/include:$C_INCLUDE_PATH<br>PATH=/str/users/tangxu/local/include:/usr/include:/usr/local/include:$CPLUS_INCLUDE_PATH<br>export LD_LIBRARY_PATH=/opt/intel/lib/intel64:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH<br>export PYTHONPATH=/str/users/tangxu/local/lib/python2.7/site-packages/</p>
+<h2 id="Install_openblas">Install openblas</h2><pre><code>download openblas 
+make <span class="variable">FC=</span>gfortran <span class="variable">NO_AFFINITY=</span><span class="number">1</span> <span class="variable">USE_OPENMP=</span><span class="number">1</span> <span class="variable">USE_LAPACK=</span><span class="number">1</span>
+make <span class="variable">PREFIX=</span>/str/users/tangxu/local/ install
+</code></pre><h2 id="Install_all_depend">Install all depend</h2><h3 id="Install_cmake">Install cmake</h3><pre><code>download cmake
+./bootstrap --prefix=<span class="regexp">/str/users</span><span class="regexp">/tangxu/local</span>
+make
+make install
+</code></pre><h3 id="Install_Protobuf">Install Protobuf</h3><pre><code>download protobuf 
+tar zxvf protobuf<span class="class">.tar</span><span class="class">.gz</span>
+cd protobuf
+./configure --prefix=/str/users/tangxu/local
+make
+make install
+</code></pre><h3 id="Install_snappy">Install snappy</h3><pre><code>download snappy
+tar zxvf snappy<span class="class">.tar</span><span class="class">.gz</span>
+cd snappyma
+./configure --prefix=/str/users/tangxu/local
+make
+make install
+</code></pre><h3 id="Install_leveldb">Install leveldb</h3><pre><code>download leveldb
+tar zxvf leveldb.tar.gz
+cd leveldb
+make
+cp -av libleveldb.* <span class="regexp">/str/u</span>sers<span class="regexp">/tangxu/</span>local<span class="regexp">/lib/</span>
+cp -av <span class="keyword">include</span><span class="regexp">/leveldb /</span>str<span class="regexp">/users/</span>tangxu<span class="regexp">/local/i</span>nclude<span class="regexp">/</span>
+</code></pre><h3 id="Install_OpenCV">Install OpenCV</h3><pre><code>download opencv
+tar zxvf opencv.tar.gz
+<span class="keyword">cd</span> opencv
+<span class="keyword">mkdir</span> release &amp;&amp; <span class="keyword">cd</span> release
+cmake -<span class="keyword">D</span> CMAKE_BUILD_TYPE=RELEASE -<span class="keyword">D</span> CMAKE_INSTALL_PREFIX=/str/users/tangxu/<span class="keyword">local</span> -<span class="keyword">D</span> CUDA_GENERATION=Kepler ..
+make
+make install
+</code></pre><h3 id="Install_Boost">Install Boost</h3><pre><code>download boost
+./<span class="keyword">bootstrap</span>.<span class="keyword">sh</span> --prefix=/str/users/tangxu/<span class="keyword">local</span>
+./b2 -j 32
+./b2 install
+</code></pre><h3 id="Install_google-glog_[!!!NOT_EASY,_CONFLICT_WITH_THE_GFLAGS_INSTALLED_IN_/USR/LOCAL_BY_ROOT]">Install google-glog [!!!NOT EASY, CONFLICT WITH THE GFLAGS INSTALLED IN /USR/LOCAL BY ROOT]</h3><pre><code>download glog
+tar zxvf glog.tar.gz
+<span class="keyword">cd</span> glog
+./configure --prefix=/str/users/tangxu/<span class="keyword">local</span>
+make -<span class="literal">j</span>
+make install
+</code></pre><h3 id="Install_gflags">Install gflags</h3><pre><code>download gflags
+<span class="keyword">cd</span> gflags
+<span class="keyword">mkdir</span> build &amp;&amp; <span class="keyword">cd</span> build
+CXXFLAGS=<span class="string">"-fPIC"</span> cmake -<span class="keyword">D</span> CMAKE_INSTALL_PREFIX=/str/users/tangxu/<span class="keyword">local</span> ..
+make -<span class="literal">j</span>
+make install
+</code></pre><h3 id="Install_lmdb">Install lmdb</h3><pre><code>download lmdb
+cd mdb/libraries/liblmdb
+make
+make prefix=/str/users/tangxu/local <span class="operator"><span class="keyword">install</span>
+# man was <span class="keyword">not</span> <span class="keyword">found</span>, it does <span class="keyword">not</span> matter [you should <span class="keyword">add</span> the file <span class="keyword">local</span>/man/man1]</span>
+</code></pre><h3 id="Install_hdf5">Install hdf5</h3><pre><code> download hdf5
+tar zxvf hdf5.tar.gz
+cd hdf5
+<span class="keyword">.</span>/configure --prefix=/str/users/tangxu/local
+make
+make<span class="instruction"> check </span>               <span class="comment"># run test suite.</span>
+make install
+make<span class="instruction"> check-install </span>       <span class="comment"># verify installation.</span>
+</code></pre><h3 id="Install_cuDNN">Install cuDNN</h3><pre><code>download cuDNN
+*<span class="keyword">copy</span> <span class="keyword">the</span> cudnn lib <span class="keyword">and</span> head <span class="keyword">to</span> ~/<span class="keyword">local</span>/lib <span class="keyword">and</span> ~/<span class="keyword">local</span>/include
+*<span class="keyword">or</span> you can download <span class="keyword">the</span> cudnn library <span class="keyword">from</span> website <span class="keyword">and</span> <span class="keyword">copy</span>
+cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class="keyword">local</span>/lib
+cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class="keyword">local</span>/include
+</code></pre><h2 id="Add_the_path_int_~/-bashrc">Add the path int ~/.bashrc</h2><pre><code>vim ~/.bashrc
+============[.bashrc]
+// <span class="keyword">for</span> gpu
+<span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda/bin:<span class="variable">$PATH</span>
+<span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda/lib64:<span class="variable">$LD_LIBRARY_PATH</span>
+// <span class="keyword">for</span> OpenBLAS
+<span class="built_in">export</span> LD_LIBRARY_PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/OpenBLAS/lib:<span class="variable">$LD_LIBRARY_PATH</span>
+<span class="comment">#for ~/local </span>
+<span class="built_in">export</span> LD_LIBRARY_PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/lib:<span class="variable">$LD_LIBRARY_PATH</span>
+<span class="built_in">export</span> PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/bin:<span class="variable">$PATH</span>
+// <span class="keyword">for</span> openMP
+<span class="built_in">export</span> OMP_NUM_THREADS=<span class="number">20</span>
+============
+<span class="built_in">source</span> ~/.bashrc
+</code></pre><h2 id="Compile_caffe">Compile caffe</h2><p>   *Edit the Makefile.config<br>   cp Makefile.config.example Makefile.config<br>   vim Makefile.config<br>       ============[Makefile.config]<br>       USE_CUDNN := 1<br>       CUDA_DIR := /usr/local/cuda<br>       BLAS := open<br>       BLAS_INCLUDE := /data1/NLPRMNT/xxxxxxxxxx/local/OpenBLAS/include<br>       BLAS_LIB := /data1/NLPRMNT/xxxxxxxxxx/local/OpenBLAS/lib<br>       INCLUDE_DIRS := /data1/NLPRMNT/xxxxxxxxxx/local/include<br>       LIBRARY_DIRS := /data1/NLPRMNT/xxxxxxxxxx/local/lib</p>
+<pre><code><span class="header">#commit the python/matlab part
+============</span>
+</code></pre><p>   *make, the first two lines were run on login node<br>   make all -j8<br>   make test -j8<br>   make runtest -j8</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://takecareofbigboss.github.io/2015/05/23/caffe-on-GPU-cluster/" data-title="Caffe on GPU Cluster | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/05/20/Yi-Ma-s-Sayings/"  title="Yi Ma&#39;s Sayings">
+ <strong>下一篇：</strong><br/> 
+ <span>Yi Ma&#39;s Sayings
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/23/caffe-on-GPU-cluster/" data-title="Caffe on GPU Cluster" data-url="http://takecareofbigboss.github.io/2015/05/23/caffe-on-GPU-cluster/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clone_the_caffe"><span class="toc-number">1.</span> <span class="toc-text">Clone the caffe</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Install_python"><span class="toc-number">1.0.1.</span> <span class="toc-text">Install python</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention:"><span class="toc-number">1.1.</span> <span class="toc-text">Attention:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-bashrc_file_setting"><span class="toc-number">2.</span> <span class="toc-text">.bashrc file setting</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install_openblas"><span class="toc-number">3.</span> <span class="toc-text">Install openblas</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install_all_depend"><span class="toc-number">4.</span> <span class="toc-text">Install all depend</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_cmake"><span class="toc-number">4.1.</span> <span class="toc-text">Install cmake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_Protobuf"><span class="toc-number">4.2.</span> <span class="toc-text">Install Protobuf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_snappy"><span class="toc-number">4.3.</span> <span class="toc-text">Install snappy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_leveldb"><span class="toc-number">4.4.</span> <span class="toc-text">Install leveldb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_OpenCV"><span class="toc-number">4.5.</span> <span class="toc-text">Install OpenCV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_Boost"><span class="toc-number">4.6.</span> <span class="toc-text">Install Boost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_google-glog_[!!!NOT_EASY,_CONFLICT_WITH_THE_GFLAGS_INSTALLED_IN_/USR/LOCAL_BY_ROOT]"><span class="toc-number">4.7.</span> <span class="toc-text">Install google-glog [!!!NOT EASY, CONFLICT WITH THE GFLAGS INSTALLED IN /USR/LOCAL BY ROOT]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_gflags"><span class="toc-number">4.8.</span> <span class="toc-text">Install gflags</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_lmdb"><span class="toc-number">4.9.</span> <span class="toc-text">Install lmdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_hdf5"><span class="toc-number">4.10.</span> <span class="toc-text">Install hdf5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install_cuDNN"><span class="toc-number">4.11.</span> <span class="toc-text">Install cuDNN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Add_the_path_int_~/-bashrc"><span class="toc-number">5.</span> <span class="toc-text">Add the path int ~/.bashrc</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Compile_caffe"><span class="toc-number">6.</span> <span class="toc-text">Compile caffe</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://sist.shanghaitech.edu.cn/faculty/gaosh/Home.html" target="_blank" title="Computer Vision Group at ShanghaiTech University">Computer Vision Group at ShanghaiTech University</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.shanghaitech.edu.cn/" target="_blank" title="ShanghaiTech Official Website">ShanghaiTech Official Website</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xu Tang at ShanghaiTech. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Xu Tang">Xu Tang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"takecareofbigboss"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

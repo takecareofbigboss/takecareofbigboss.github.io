@@ -81,6 +81,153 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/05/23/caffe-on-GPU-cluster/" title="Caffe on GPU Cluster" itemprop="url">Caffe on GPU Cluster</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-23T11:56:17.000Z" itemprop="datePublished"> 發表於 2015-05-23</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>FOR ALL SOFTWARE PACKAGE,<br>YOU CAN GOOGLE IT AND DOWNLOAD FROM CORRESPONDING WEBSITE.</p>
+<h2 id="Clone_the_caffe">Clone the caffe</h2><pre><code>git clone <span class="string">https:</span><span class="comment">//github.com/BVLC/caffe.git</span>
+</code></pre><p>Before start this tutorial, you should first install python on cpu clusters</p>
+<h4 id="Install_python">Install python</h4><pre><code>cd python2.<span class="number">7.9</span>
+.<span class="regexp">/configure --prefix=/</span>str<span class="regexp">/users/</span>tangxu<span class="regexp">/local/</span> --enable-shared
+make
+make install
+</code></pre><h3 id="Attention:">Attention:</h3><p>&emsp;&emsp;All the path /home/YOURNAME/local should be changed to /str/users/tangxu/local/ if you want to install it on the cpu clusters.<br>&emsp;&emsp;All the path /str/users/tangxu/local/ should be changed to /home/YOURNAME/local if you want to install it on the gpu server.</p>
+<h2 id="-bashrc_file_setting">.bashrc file setting</h2><p>vim .bashrc</p>
+<p>export PATH=/str/users/tangxu/local/bin:$PATH<br>export LD_LIBRARY_PATH=/str/users/tangxu/local/lib:$LD_LIBRARY_PATH</p>
+<p>export PKG_CONFIG_PATH=/str/users/tangxu/local/lib/pkgconfig:$PKG_CONFIG_PATH<br>export PATH=/usr/local/cuda-7.0/bin:$PATH<br>export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH<br>PATH=/str/users/tangxu/local/include:/usr/include:/usr/local/include:$C_INCLUDE_PATH<br>PATH=/str/users/tangxu/local/include:/usr/include:/usr/local/include:$CPLUS_INCLUDE_PATH<br>export LD_LIBRARY_PATH=/opt/intel/lib/intel64:/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH<br>export PYTHONPATH=/str/users/tangxu/local/lib/python2.7/site-packages/</p>
+<h2 id="Install_openblas">Install openblas</h2><pre><code>download openblas 
+make <span class="variable">FC=</span>gfortran <span class="variable">NO_AFFINITY=</span><span class="number">1</span> <span class="variable">USE_OPENMP=</span><span class="number">1</span> <span class="variable">USE_LAPACK=</span><span class="number">1</span>
+make <span class="variable">PREFIX=</span>/str/users/tangxu/local/ install
+</code></pre><h2 id="Install_all_depend">Install all depend</h2><h3 id="Install_cmake">Install cmake</h3><pre><code>download cmake
+./bootstrap --prefix=<span class="regexp">/str/users</span><span class="regexp">/tangxu/local</span>
+make
+make install
+</code></pre><h3 id="Install_Protobuf">Install Protobuf</h3><pre><code>download protobuf 
+tar zxvf protobuf<span class="class">.tar</span><span class="class">.gz</span>
+cd protobuf
+./configure --prefix=/str/users/tangxu/local
+make
+make install
+</code></pre><h3 id="Install_snappy">Install snappy</h3><pre><code>download snappy
+tar zxvf snappy<span class="class">.tar</span><span class="class">.gz</span>
+cd snappyma
+./configure --prefix=/str/users/tangxu/local
+make
+make install
+</code></pre><h3 id="Install_leveldb">Install leveldb</h3><pre><code>download leveldb
+tar zxvf leveldb.tar.gz
+cd leveldb
+make
+cp -av libleveldb.* <span class="regexp">/str/u</span>sers<span class="regexp">/tangxu/</span>local<span class="regexp">/lib/</span>
+cp -av <span class="keyword">include</span><span class="regexp">/leveldb /</span>str<span class="regexp">/users/</span>tangxu<span class="regexp">/local/i</span>nclude<span class="regexp">/</span>
+</code></pre><h3 id="Install_OpenCV">Install OpenCV</h3><pre><code>download opencv
+tar zxvf opencv.tar.gz
+<span class="keyword">cd</span> opencv
+<span class="keyword">mkdir</span> release &amp;&amp; <span class="keyword">cd</span> release
+cmake -<span class="keyword">D</span> CMAKE_BUILD_TYPE=RELEASE -<span class="keyword">D</span> CMAKE_INSTALL_PREFIX=/str/users/tangxu/<span class="keyword">local</span> -<span class="keyword">D</span> CUDA_GENERATION=Kepler ..
+make
+make install
+</code></pre><h3 id="Install_Boost">Install Boost</h3><pre><code>download boost
+./<span class="keyword">bootstrap</span>.<span class="keyword">sh</span> --prefix=/str/users/tangxu/<span class="keyword">local</span>
+./b2 -j 32
+./b2 install
+</code></pre><h3 id="Install_google-glog_[!!!NOT_EASY,_CONFLICT_WITH_THE_GFLAGS_INSTALLED_IN_/USR/LOCAL_BY_ROOT]">Install google-glog [!!!NOT EASY, CONFLICT WITH THE GFLAGS INSTALLED IN /USR/LOCAL BY ROOT]</h3><pre><code>download glog
+tar zxvf glog.tar.gz
+<span class="keyword">cd</span> glog
+./configure --prefix=/str/users/tangxu/<span class="keyword">local</span>
+make -<span class="literal">j</span>
+make install
+</code></pre><h3 id="Install_gflags">Install gflags</h3><pre><code>download gflags
+<span class="keyword">cd</span> gflags
+<span class="keyword">mkdir</span> build &amp;&amp; <span class="keyword">cd</span> build
+CXXFLAGS=<span class="string">"-fPIC"</span> cmake -<span class="keyword">D</span> CMAKE_INSTALL_PREFIX=/str/users/tangxu/<span class="keyword">local</span> ..
+make -<span class="literal">j</span>
+make install
+</code></pre><h3 id="Install_lmdb">Install lmdb</h3><pre><code>download lmdb
+cd mdb/libraries/liblmdb
+make
+make prefix=/str/users/tangxu/local <span class="operator"><span class="keyword">install</span>
+# man was <span class="keyword">not</span> <span class="keyword">found</span>, it does <span class="keyword">not</span> matter [you should <span class="keyword">add</span> the file <span class="keyword">local</span>/man/man1]</span>
+</code></pre><h3 id="Install_hdf5">Install hdf5</h3><pre><code> download hdf5
+tar zxvf hdf5.tar.gz
+cd hdf5
+<span class="keyword">.</span>/configure --prefix=/str/users/tangxu/local
+make
+make<span class="instruction"> check </span>               <span class="comment"># run test suite.</span>
+make install
+make<span class="instruction"> check-install </span>       <span class="comment"># verify installation.</span>
+</code></pre><h3 id="Install_cuDNN">Install cuDNN</h3><pre><code>download cuDNN
+*<span class="keyword">copy</span> <span class="keyword">the</span> cudnn lib <span class="keyword">and</span> head <span class="keyword">to</span> ~/<span class="keyword">local</span>/lib <span class="keyword">and</span> ~/<span class="keyword">local</span>/include
+*<span class="keyword">or</span> you can download <span class="keyword">the</span> cudnn library <span class="keyword">from</span> website <span class="keyword">and</span> <span class="keyword">copy</span>
+cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class="keyword">local</span>/lib
+cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class="keyword">local</span>/include
+</code></pre><h2 id="Add_the_path_int_~/-bashrc">Add the path int ~/.bashrc</h2><pre><code>vim ~/.bashrc
+============[.bashrc]
+// <span class="keyword">for</span> gpu
+<span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/cuda/bin:<span class="variable">$PATH</span>
+<span class="built_in">export</span> LD_LIBRARY_PATH=/usr/<span class="built_in">local</span>/cuda/lib64:<span class="variable">$LD_LIBRARY_PATH</span>
+// <span class="keyword">for</span> OpenBLAS
+<span class="built_in">export</span> LD_LIBRARY_PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/OpenBLAS/lib:<span class="variable">$LD_LIBRARY_PATH</span>
+<span class="comment">#for ~/local </span>
+<span class="built_in">export</span> LD_LIBRARY_PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/lib:<span class="variable">$LD_LIBRARY_PATH</span>
+<span class="built_in">export</span> PATH=/data1/NLPRMNT/xxxxxxxxxx/<span class="built_in">local</span>/bin:<span class="variable">$PATH</span>
+// <span class="keyword">for</span> openMP
+<span class="built_in">export</span> OMP_NUM_THREADS=<span class="number">20</span>
+============
+<span class="built_in">source</span> ~/.bashrc
+</code></pre><h2 id="Compile_caffe">Compile caffe</h2><p>   *Edit the Makefile.config<br>   cp Makefile.config.example Makefile.config<br>   vim Makefile.config<br>       ============[Makefile.config]<br>       USE_CUDNN := 1<br>       CUDA_DIR := /usr/local/cuda<br>       BLAS := open<br>       BLAS_INCLUDE := /data1/NLPRMNT/xxxxxxxxxx/local/OpenBLAS/include<br>       BLAS_LIB := /data1/NLPRMNT/xxxxxxxxxx/local/OpenBLAS/lib<br>       INCLUDE_DIRS := /data1/NLPRMNT/xxxxxxxxxx/local/include<br>       LIBRARY_DIRS := /data1/NLPRMNT/xxxxxxxxxx/local/lib</p>
+<pre><code><span class="header">#commit the python/matlab part
+============</span>
+</code></pre><p>   *make, the first two lines were run on login node<br>   make all -j8<br>   make test -j8<br>   make runtest -j8</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/23/caffe-on-GPU-cluster/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/23/caffe-on-GPU-cluster/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/05/20/Yi-Ma-s-Sayings/" title="Yi Ma&#39;s Sayings" itemprop="url">Yi Ma&#39;s Sayings</a>
   </h1>
   <p class="article-author">By
