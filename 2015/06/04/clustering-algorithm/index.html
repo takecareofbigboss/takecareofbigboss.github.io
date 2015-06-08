@@ -4,22 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Latex Module | Xu Tang&#39;s Homepages</title>
+    <title>Clustering Algorithm | Xu Tang&#39;s Homepages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xu Tang">
     
 
     
-    <meta name="description" content="latex 模板\documentclass{article}\usepackage{amssymb}\usepackage{mathrsfs}\usepackage{ctex}  %用于插入中文字符\usepackage{float}\usepackage[version=3]{mhchem} % Package for chemical equation typesetting\usepack">
+    <meta name="description" content="Clustering AlgorithmLaplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;&amp;emsp;而对于W公式的构造有三种方法：&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;K-NN affinity:$s_1$">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Latex Module">
-<meta property="og:url" content="http://takecareofbigboss.github.io/2015/05/28/latex-module/index.html">
+<meta property="og:title" content="Clustering Algorithm">
+<meta property="og:url" content="http://takecareofbigboss.github.io/2015/06/04/clustering-algorithm/index.html">
 <meta property="og:site_name" content="Xu Tang's Homepages">
-<meta property="og:description" content="latex 模板\documentclass{article}\usepackage{amssymb}\usepackage{mathrsfs}\usepackage{ctex}  %用于插入中文字符\usepackage{float}\usepackage[version=3]{mhchem} % Package for chemical equation typesetting\usepack">
+<meta property="og:description" content="Clustering AlgorithmLaplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;&amp;emsp;而对于W公式的构造有三种方法：&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;K-NN affinity:$s_1$">
+<meta property="og:image" content="http://pfile.cn/2ybdjb">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Latex Module">
-<meta name="twitter:description" content="latex 模板\documentclass{article}\usepackage{amssymb}\usepackage{mathrsfs}\usepackage{ctex}  %用于插入中文字符\usepackage{float}\usepackage[version=3]{mhchem} % Package for chemical equation typesetting\usepack">
+<meta name="twitter:title" content="Clustering Algorithm">
+<meta name="twitter:description" content="Clustering AlgorithmLaplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;&amp;emsp;而对于W公式的构造有三种方法：&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;K-NN affinity:$s_1$">
 
     
     <link rel="alternative" href="/atom.xml" title="Xu Tang&#39;s Homepages" type="application/atom+xml">
@@ -79,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/28/latex-module/" title="Latex Module" itemprop="url">Latex Module</a>
+      <a href="/2015/06/04/clustering-algorithm/" title="Clustering Algorithm" itemprop="url">Clustering Algorithm</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-28T13:28:43.000Z" itemprop="datePublished"> 發表於 2015-05-28</time>
+    <time datetime="2015-06-04T03:29:06.000Z" itemprop="datePublished"> 發表於 2015-06-04</time>
     
   </p>
 </header>
@@ -95,22 +99,12 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#latex_模板"><span class="toc-number">1.</span> <span class="toc-text">latex 模板</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering_Algorithm"><span class="toc-number">1.</span> <span class="toc-text">Clustering Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Laplacian_Eigenmaps_(LE)"><span class="toc-number">1.1.</span> <span class="toc-text">Laplacian Eigenmaps (LE)</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="latex_模板">latex 模板</h2><p>\documentclass{article}<br>\usepackage{amssymb}<br>\usepackage{mathrsfs}<br>\usepackage{ctex}  %用于插入中文字符<br>\usepackage{float}<br>\usepackage[version=3]{mhchem} % Package for chemical equation typesetting<br>\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units<br>\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green]{hyperref}<br>\usepackage{graphicx} % Required for the inclusion of images<br>\usepackage{natbib} % Required to change bibliography style to APA<br>\usepackage{amsmath} % Required for some math elements<br>\usepackage{indentfirst}</p>
-<p>\setlength\parindent{2em} % Removes all indentation from paragraphs</p>
-<p>\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)</p>
-<p>%\usepackage{times} % Uncomment to use the Times New Roman font</p>
-<p>%————————————————————————————————————————————<br>%    DOCUMENT INFORMATION<br>%————————————————————————————————————————————</p>
-<p>\title{Weekly Report} % Title</p>
-<p>\author{Xu Tang} % Author name</p>
-<p>\date{\today} % Date for the report</p>
-<p>\begin{document}</p>
-<p>\maketitle % Insert the title, author and date</p>
-<p>你好</p>
-<p>\end{document}</p>
+		<h2 id="Clustering_Algorithm">Clustering Algorithm</h2><h3 id="Laplacian_Eigenmaps_(LE)">Laplacian Eigenmaps (LE)</h3><p>&emsp;&emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：<br><img src="http://pfile.cn/2ybdjb" alt=""></p>
+<p>&emsp;&emsp;而对于W公式的构造有三种方法：<br>&emsp;&emsp;&emsp;&emsp;K-NN affinity:$s_1$</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -123,7 +117,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://takecareofbigboss.github.io/2015/05/28/latex-module/" data-title="Latex Module | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  <div data-url="http://takecareofbigboss.github.io/2015/06/04/clustering-algorithm/" data-title="Clustering Algorithm | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -136,19 +130,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/06/04/clustering-algorithm/" title="Clustering Algorithm">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Clustering Algorithm</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/28/The-Derivation-about-CNN-and-Antoencoder/"  title="The Derivation about CNN and Antoencoder">
+<a href="/2015/05/28/latex-module/"  title="Latex Module">
  <strong>下一篇：</strong><br/> 
- <span>The Derivation about CNN and Antoencoder
+ <span>Latex Module
 </span>
 </a>
 </div>
@@ -157,7 +143,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/28/latex-module/" data-title="Latex Module" data-url="http://takecareofbigboss.github.io/2015/05/28/latex-module/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/04/clustering-algorithm/" data-title="Clustering Algorithm" data-url="http://takecareofbigboss.github.io/2015/06/04/clustering-algorithm/"></div>
 </section>
 
 
