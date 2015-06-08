@@ -1,0 +1,446 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Clustering Algorithm | Xu Tang&#39;s Homepages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xu Tang">
+    
+
+    
+    <meta name="description" content="Clustering Algorithm这篇博文解决了马毅老师《GPCA》新书中第四章的下面的问题：
+我把实现如下算法的几个都放在了自己的github主页：代码链接下载地址函数解释文档解释文档链接地址
+Laplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clustering Algorithm">
+<meta property="og:url" content="http://takecareofbigboss.github.io/2015/06/08/clustering-algorithm/index.html">
+<meta property="og:site_name" content="Xu Tang's Homepages">
+<meta property="og:description" content="Clustering Algorithm这篇博文解决了马毅老师《GPCA》新书中第四章的下面的问题：
+我把实现如下算法的几个都放在了自己的github主页：代码链接下载地址函数解释文档解释文档链接地址
+Laplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;">
+<meta property="og:image" content="http://pfile.cn/23uzs3">
+<meta property="og:image" content="http://pfile.cn/podbpw">
+<meta property="og:image" content="http://pfile.cn/2ybdjb">
+<meta property="og:image" content="http://pfile.cn/dsnnl0">
+<meta property="og:image" content="http://pfile.cn/kmtktc">
+<meta property="og:image" content="http://pfile.cn/c699cm">
+<meta property="og:image" content="http://pfile.cn/oth20f">
+<meta property="og:image" content="http://pfile.cn/5p5gq7">
+<meta property="og:image" content="http://pfile.cn/2o4asx">
+<meta property="og:image" content="http://pfile.cn/ng0fay">
+<meta property="og:image" content="http://pfile.cn/bixzt0">
+<meta property="og:image" content="http://pfile.cn/jj731m">
+<meta property="og:image" content="http://pfile.cn/8jkr0h">
+<meta property="og:image" content="http://pfile.cn/rvm6zk">
+<meta property="og:image" content="http://pfile.cn/ualv9r">
+<meta property="og:image" content="http://pfile.cn/zprrrk">
+<meta property="og:image" content="http://pfile.cn/syvb6a">
+<meta property="og:image" content="http://pfile.cn/yhc0a3">
+<meta property="og:image" content="http://pfile.cn/y937u4">
+<meta property="og:image" content="http://pfile.cn/2w9hqh">
+<meta property="og:image" content="http://pfile.cn/669c1m">
+<meta property="og:image" content="http://pfile.cn/aj35sd">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clustering Algorithm">
+<meta name="twitter:description" content="Clustering Algorithm这篇博文解决了马毅老师《GPCA》新书中第四章的下面的问题：
+我把实现如下算法的几个都放在了自己的github主页：代码链接下载地址函数解释文档解释文档链接地址
+Laplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：
+&amp;emsp;">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xu Tang&#39;s Homepages" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="Xu Tang&#39;s Homepages" title="Xu Tang&#39;s Homepages"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xu Tang&#39;s Homepages">Xu Tang&#39;s Homepages</a></h1>
+				<h2 class="blog-motto">Computer Vision&amp;Deep Learning&amp;Object Detection&amp;Zero-shot Learning</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/Contact-Me">Contact-Me</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:takecareofbigboss.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="poster" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/08/clustering-algorithm/" title="Clustering Algorithm" itemprop="url">Clustering Algorithm</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-08T08:25:06.000Z" itemprop="datePublished"> 發表於 2015-06-08</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clustering_Algorithm"><span class="toc-number">1.</span> <span class="toc-text">Clustering Algorithm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Laplacian_Eigenmaps_(LE)"><span class="toc-number">1.1.</span> <span class="toc-text">Laplacian Eigenmaps (LE)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程图："><span class="toc-number">1.1.1.</span> <span class="toc-text">算法流程图：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#K-means_Clustering"><span class="toc-number">1.2.</span> <span class="toc-text">K-means Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程图：-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">算法流程图：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spectral_Clustering"><span class="toc-number">1.3.</span> <span class="toc-text">Spectral Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程图：-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">算法流程图：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MinCut问题："><span class="toc-number">1.3.2.</span> <span class="toc-text">MinCut问题：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RatioCue问题："><span class="toc-number">1.3.3.</span> <span class="toc-text">RatioCue问题：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Normalized_Cut_&_Normalized_Spectral_Clustering"><span class="toc-number">1.4.</span> <span class="toc-text">Normalized Cut & Normalized Spectral Clustering</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程图：-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">算法流程图：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Normalized_Cut："><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Normalized Cut：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Normalized_Spectral_Clustering:"><span class="toc-number">1.4.1.2.</span> <span class="toc-text">Normalized Spectral Clustering:</span></a></li></ol></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="Clustering_Algorithm">Clustering Algorithm</h2><p>这篇博文解决了马毅老师《GPCA》新书中第四章的下面的问题：<br><img src="http://pfile.cn/23uzs3" alt=""><br><img src="http://pfile.cn/podbpw" alt=""></p>
+<p>我把实现如下算法的几个都放在了自己的github主页：<a href="https://github.com/takecareofbigboss/clustering" target="_blank" rel="external">代码链接下载地址</a><br>函数解释文档<a href="https://github.com/takecareofbigboss/clustering/blob/master/README.md" target="_blank" rel="external">解释文档链接地址</a></p>
+<h3 id="Laplacian_Eigenmaps_(LE)">Laplacian Eigenmaps (LE)</h3><p>&emsp;&emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：<br><img src="http://pfile.cn/2ybdjb" alt=""></p>
+<p>&emsp;&emsp;而对于W公式的构造有三种方法：<br>&emsp;&emsp;&emsp;&emsp;K-NN affinity:对于N*N的W矩阵，设置某个点i与其他所有的N个点中距离最小的K个点$W_{ij}$设置为1，其余点设置为0；<br>&emsp;&emsp;&emsp;&emsp;Gaussian affinity:$w_{ij}=exp(-|x<em>i-x_j|_2^2/2\theta ^2)$,并且$\theta$通常设置为1.0；<br>&emsp;&emsp;&emsp;&emsp;$\epsilon$-neighborhood:就是将距离小于$\epsilon$的$W\</em>{ij}$设置为1，其余的设置为0；</p>
+<p>&emsp;&emsp;我们如何分析这个优化问题呢？可以通过以下变形得知：<br><img src="http://pfile.cn/dsnnl0" alt=""><br>&emsp;&emsp;即最小化问题变成(约束条件由马毅老师的handnotes可知)：<br><img src="http://pfile.cn/kmtktc" alt=""><br>&emsp;&emsp;将优化问题改写成为拉格朗日函数：<br><img src="http://pfile.cn/c699cm" alt=""><br>&emsp;&emsp;经过求解可知，$YL=\Lambda YD$,进而推出$YLY^T=\Lambda YDY^T=\Lambda$,所以最优化的解变为$trace(YLY^T)=trace(\Lambda)$。这就是为什么算法流程图里面是求（L,D）的最小的d个特征值对应的特征向量。</p>
+<h4 id="算法流程图：">算法流程图：</h4><p><img src="http://pfile.cn/oth20f" alt=""></p>
+<h3 id="K-means_Clustering">K-means Clustering</h3><p>&emsp;&emsp;K-means算法的思路就是通过最小化所有数据点到离他最近的聚类中心的距离之和，并通过这个来估计聚类中心，并进行聚类。其优化目标如下：<br><img src="http://pfile.cn/5p5gq7" alt=""><br>&emsp;&emsp;其中，当数据点j的最近的聚类中心点i时，$W_{ij}=1$，其他的为0。$u_i$为聚类中心。</p>
+<h4 id="算法流程图：-1">算法流程图：</h4><p><img src="http://pfile.cn/2o4asx" alt=""></p>
+<h3 id="Spectral_Clustering">Spectral Clustering</h3><p>&emsp;&emsp;谱聚类的算法实际上就是基于图论的聚类方法，学习一个合适的非线性的映射，使得映射后的数据点可用k-means进行更好的分类。<br><img src="http://pfile.cn/ng0fay" alt=""><br>&emsp;&emsp;对于每一个connected graph，我们都可以写出一个如下的表达式，这也是使得这n个graph聚类的思路。因此我们要找到n个使得$LX=0X$的特征向量。但是实际中，需要找到n个最小的特征值对应的特征向量。</p>
+<h4 id="算法流程图：-2">算法流程图：</h4><p><img src="http://pfile.cn/bixzt0" alt=""></p>
+<h4 id="MinCut问题：">MinCut问题：</h4><p>&emsp;&emsp;实际上，n个connected graphs之间，也有极其小的连接，因此我们还需要度量不同subgraph之间的连接。优化目标如下：<br><img src="http://pfile.cn/jj731m" alt=""><br>&emsp;&emsp;因此，优化目标可以改写成：<br><img src="http://pfile.cn/8jkr0h" alt=""></p>
+<h4 id="RatioCue问题：">RatioCue问题：</h4><p>&emsp;&emsp;但是我们会发现这样的优化目标最后会导致每一个数据点成了一个subgraph，因此我们需要加一个约束项使得这种情况不会发生。<br><img src="http://pfile.cn/rvm6zk" alt=""><br><img src="http://pfile.cn/ualv9r" alt=""><br>&emsp;&emsp;其中：<br><img src="http://pfile.cn/zprrrk" alt=""><br><img src="http://pfile.cn/syvb6a" alt=""><br>&emsp;&emsp;因此最终的优化问题又变成了：<br><img src="http://pfile.cn/yhc0a3" alt=""></p>
+<h3 id="Normalized_Cut_&amp;_Normalized_Spectral_Clustering">Normalized Cut &amp; Normalized Spectral Clustering</h3><p><img src="http://pfile.cn/y937u4" alt=""></p>
+<p>&emsp;&emsp;用拉格朗日解最后的方程得到$Lf=\lambda Df$,这是一个广义特征值问题，因此我们求这个表达式最小的n个广义特征值对应的广义特征向量。这是NCut问题的解法。<br>&emsp;&emsp;另一种解法是令$T=D^{1/2}F$,因此优化问题变成了解以下目标函数：<br><img src="http://pfile.cn/2w9hqh" alt=""><br>&emsp;&emsp;即求$D^{-1/2}LD^{-1/2}$的最小的n个特征值对应的特征向量问题。</p>
+<h4 id="算法流程图：-3">算法流程图：</h4><h5 id="Normalized_Cut：">Normalized Cut：</h5><p><img src="http://pfile.cn/669c1m" alt=""></p>
+<h5 id="Normalized_Spectral_Clustering:">Normalized Spectral Clustering:</h5><p><img src="http://pfile.cn/aj35sd" alt=""></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://takecareofbigboss.github.io/2015/06/08/clustering-algorithm/" data-title="Clustering Algorithm | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/06/08/how-to-use-github-blog/"  title="how to use github blog">
+ <strong>下一篇：</strong><br/> 
+ <span>how to use github blog
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/06/08/clustering-algorithm/" data-title="Clustering Algorithm" data-url="http://takecareofbigboss.github.io/2015/06/08/clustering-algorithm/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://sist.shanghaitech.edu.cn/faculty/gaosh/Home.html" target="_blank" title="Computer Vision Group at ShanghaiTech University">Computer Vision Group at ShanghaiTech University</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.shanghaitech.edu.cn/" target="_blank" title="ShanghaiTech Official Website">ShanghaiTech Official Website</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xu Tang at ShanghaiTech. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Xu Tang">Xu Tang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"takecareofbigboss"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

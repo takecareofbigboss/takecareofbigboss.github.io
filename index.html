@@ -81,21 +81,35 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/04/clustering-algorithm/" title="Clustering Algorithm" itemprop="url">Clustering Algorithm</a>
+      <a href="/2015/06/08/clustering-algorithm/" title="Clustering Algorithm" itemprop="url">Clustering Algorithm</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-04T03:29:06.000Z" itemprop="datePublished"> 發表於 2015-06-04</time>
+    <time datetime="2015-06-08T08:25:06.000Z" itemprop="datePublished"> 發表於 2015-06-08</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h2 id="Clustering_Algorithm">Clustering Algorithm</h2><h3 id="Laplacian_Eigenmaps_(LE)">Laplacian Eigenmaps (LE)</h3><p>&emsp;&emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：<br><img src="http://pfile.cn/2ybdjb" alt=""></p>
-<p>&emsp;&emsp;而对于W公式的构造有三种方法：<br>&emsp;&emsp;&emsp;&emsp;K-NN affinity:$s_1$</p>
+        <h2 id="Clustering_Algorithm">Clustering Algorithm</h2><p>这篇博文解决了马毅老师《GPCA》新书中第四章的下面的问题：<br><img src="http://pfile.cn/23uzs3" alt=""><br><img src="http://pfile.cn/podbpw" alt=""></p>
+<p>我把实现如下算法的几个都放在了自己的github主页：<a href="https://github.com/takecareofbigboss/clustering" target="_blank" rel="external">代码链接下载地址</a><br>函数解释文档<a href="https://github.com/takecareofbigboss/clustering/blob/master/README.md" target="_blank" rel="external">解释文档链接地址</a></p>
+<h3 id="Laplacian_Eigenmaps_(LE)">Laplacian Eigenmaps (LE)</h3><p>&emsp;&emsp;LE算法的思路就是局部点之间的距离保持不变，进而使投影之后的结果也是保举的，和LPP的思路类似。其优化目标如下：<br><img src="http://pfile.cn/2ybdjb" alt=""></p>
+<p>&emsp;&emsp;而对于W公式的构造有三种方法：<br>&emsp;&emsp;&emsp;&emsp;K-NN affinity:对于N*N的W矩阵，设置某个点i与其他所有的N个点中距离最小的K个点$W_{ij}$设置为1，其余点设置为0；<br>&emsp;&emsp;&emsp;&emsp;Gaussian affinity:$w_{ij}=exp(-|x<em>i-x_j|_2^2/2\theta ^2)$,并且$\theta$通常设置为1.0；<br>&emsp;&emsp;&emsp;&emsp;$\epsilon$-neighborhood:就是将距离小于$\epsilon$的$W\</em>{ij}$设置为1，其余的设置为0；</p>
+<p>&emsp;&emsp;我们如何分析这个优化问题呢？可以通过以下变形得知：<br><img src="http://pfile.cn/dsnnl0" alt=""><br>&emsp;&emsp;即最小化问题变成(约束条件由马毅老师的handnotes可知)：<br><img src="http://pfile.cn/kmtktc" alt=""><br>&emsp;&emsp;将优化问题改写成为拉格朗日函数：<br><img src="http://pfile.cn/c699cm" alt=""><br>&emsp;&emsp;经过求解可知，$YL=\Lambda YD$,进而推出$YLY^T=\Lambda YDY^T=\Lambda$,所以最优化的解变为$trace(YLY^T)=trace(\Lambda)$。这就是为什么算法流程图里面是求（L,D）的最小的d个特征值对应的特征向量。</p>
+<h4 id="算法流程图：">算法流程图：</h4><p><img src="http://pfile.cn/oth20f" alt=""></p>
+<h3 id="K-means_Clustering">K-means Clustering</h3><p>&emsp;&emsp;K-means算法的思路就是通过最小化所有数据点到离他最近的聚类中心的距离之和，并通过这个来估计聚类中心，并进行聚类。其优化目标如下：<br><img src="http://pfile.cn/5p5gq7" alt=""><br>&emsp;&emsp;其中，当数据点j的最近的聚类中心点i时，$W_{ij}=1$，其他的为0。$u_i$为聚类中心。</p>
+<h4 id="算法流程图：-1">算法流程图：</h4><p><img src="http://pfile.cn/2o4asx" alt=""></p>
+<h3 id="Spectral_Clustering">Spectral Clustering</h3><p>&emsp;&emsp;谱聚类的算法实际上就是基于图论的聚类方法，学习一个合适的非线性的映射，使得映射后的数据点可用k-means进行更好的分类。<br><img src="http://pfile.cn/ng0fay" alt=""><br>&emsp;&emsp;对于每一个connected graph，我们都可以写出一个如下的表达式，这也是使得这n个graph聚类的思路。因此我们要找到n个使得$LX=0X$的特征向量。但是实际中，需要找到n个最小的特征值对应的特征向量。</p>
+<h4 id="算法流程图：-2">算法流程图：</h4><p><img src="http://pfile.cn/bixzt0" alt=""></p>
+<h4 id="MinCut问题：">MinCut问题：</h4><p>&emsp;&emsp;实际上，n个connected graphs之间，也有极其小的连接，因此我们还需要度量不同subgraph之间的连接。优化目标如下：<br><img src="http://pfile.cn/jj731m" alt=""><br>&emsp;&emsp;因此，优化目标可以改写成：<br><img src="http://pfile.cn/8jkr0h" alt=""></p>
+<h4 id="RatioCue问题：">RatioCue问题：</h4><p>&emsp;&emsp;但是我们会发现这样的优化目标最后会导致每一个数据点成了一个subgraph，因此我们需要加一个约束项使得这种情况不会发生。<br><img src="http://pfile.cn/rvm6zk" alt=""><br><img src="http://pfile.cn/ualv9r" alt=""><br>&emsp;&emsp;其中：<br><img src="http://pfile.cn/zprrrk" alt=""><br><img src="http://pfile.cn/syvb6a" alt=""><br>&emsp;&emsp;因此最终的优化问题又变成了：<br><img src="http://pfile.cn/yhc0a3" alt=""></p>
+<h3 id="Normalized_Cut_&amp;_Normalized_Spectral_Clustering">Normalized Cut &amp; Normalized Spectral Clustering</h3><p><img src="http://pfile.cn/y937u4" alt=""></p>
+<p>&emsp;&emsp;用拉格朗日解最后的方程得到$Lf=\lambda Df$,这是一个广义特征值问题，因此我们求这个表达式最小的n个广义特征值对应的广义特征向量。这是NCut问题的解法。<br>&emsp;&emsp;另一种解法是令$T=D^{1/2}F$,因此优化问题变成了解以下目标函数：<br><img src="http://pfile.cn/2w9hqh" alt=""><br>&emsp;&emsp;即求$D^{-1/2}LD^{-1/2}$的最小的n个特征值对应的特征向量问题。</p>
+<h4 id="算法流程图：-3">算法流程图：</h4><h5 id="Normalized_Cut：">Normalized Cut：</h5><p><img src="http://pfile.cn/669c1m" alt=""></p>
+<h5 id="Normalized_Spectral_Clustering:">Normalized Spectral Clustering:</h5><p><img src="http://pfile.cn/aj35sd" alt=""></p>
 
         
         
@@ -115,7 +129,69 @@
 <div class="comments-count">
 	
 	  	<span></span>
-		<a href="/2015/06/04/clustering-algorithm/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/04/clustering-algorithm/" data-count-type="comments">&nbsp;</a>
+		<a href="/2015/06/08/clustering-algorithm/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/08/clustering-algorithm/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand poster" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/08/how-to-use-github-blog/" title="how to use github blog" itemprop="url">how to use github blog</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-08T08:11:04.000Z" itemprop="datePublished"> 發表於 2015-06-08</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="hexo教程">hexo教程</h1><p>hexo new page “about”  新建一个about导航<br>INFO  Created: c:\Learning Files\github\tangxu\source\contact\index.md</p>
+<p>hexo new post “mingzi” 新建一个mingzi的post来发表文章<br>INFO  Created: c:\Learning Files\github\tangxu\source_posts\post.md</p>
+<p>![] ( 图片链接地址 )  在markdown中插入图片信息</p>
+<p>&amp;emsp ; &amp; emsp;表示首行缩进两个格子</p>
+<p>hexo d -g #生成加部署<br>hexo s -g #预览加部署</p>
+<h3 id="github如何上传自己的代码：">github如何上传自己的代码：</h3><p>…or create a new repository on the command line</p>
+<p>echo # - &gt;&gt; README.md<br>git init<br>git add README.md<br>git commit -m “first commit”<br>%—————此步需要手动在github创建新的repository，比如clustering————-%<br>git remote add origin <a href="https://github.com/takecareofbigboss/clustering.git" target="_blank" rel="external">https://github.com/takecareofbigboss/clustering.git</a><br>git push -u origin master<br>…or push an existing repository from the command line</p>
+<p>git remote add origin <a href="https://github.com/takecareofbigboss/clustering.git" target="_blank" rel="external">https://github.com/takecareofbigboss/clustering.git</a><br>git push -u origin master<br>…or import code from another repository</p>
+<p>You can initialize this repository with code from a Subversion, Mercurial, or TFS project.</p>
+<p>每次需要提交代码的文件，就用以下操作：<br>git add k_means.m<br>git add main.m<br>git commit -m “first commit”<br>git push -u origin master</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/08/how-to-use-github-blog/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/08/how-to-use-github-blog/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
@@ -671,62 +747,6 @@ cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class=
 	
 	  	<span></span>
 		<a href="/2015/05/01/post/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/01/post/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/15/schedule/" title="Schedule" itemprop="url">Schedule</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-15T08:38:40.000Z" itemprop="datePublished"> 發表於 2015-04-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="Paper_Reading_Lists">Paper Reading Lists</h2><p><a href="http://www.cs.berkeley.
-edu/~bharath2/pubs/pdfs/BharathECCV2014.pdf" target="_blank" rel="external">Simultaneous Detection and Segmentation</a></p>
-<p><a href="http://graphics.stanford.edu/projects/densecrf/densecrf.pdf#userconsent#" target="_blank" rel="external">Efﬁcient Inference in Fully Connected CRFs with Gaussian Edge Potentials</a></p>
-<h2 id="Code_Reading">Code Reading</h2><p><a href="http://cs.brown.edu/~pff/segment/" target="_blank" rel="external">efficient graph based segmentation</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/15/schedule/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/15/schedule/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
