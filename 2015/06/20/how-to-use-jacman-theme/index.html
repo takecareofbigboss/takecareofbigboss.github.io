@@ -75,7 +75,7 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="poster" itemscope itemprop="blogPost">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -88,7 +88,7 @@
 		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-20T10:54:29.000Z" itemprop="datePublished"> 發表於 2015-06-20</time>
+    <time datetime="2015-06-20T12:40:15.852Z" itemprop="datePublished"> 發表於 2015-06-20</time>
     
   </p>
 </header>
@@ -108,6 +108,16 @@
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="../../../../categories/Github/">Github</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Github/">Github</a>
+  </div>
 
 </div>
 
@@ -115,30 +125,8 @@
 
 	<div class="article-share" id="share">
 	
-	<div class="share-jiathis">
-	  
-<div class="jiathis_style_24x24">
-	<a class="jiathis_button_tsina"></a>
-	<a class="jiathis_button_weixin"></a>
-	<a class="jiathis_button_renren"></a>
-	<a class="jiathis_button_qzone"></a>
-	<a class="jiathis_button_googleplus"></a>
-	<a class="jiathis_button_douban"></a>
-	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-    var jiathis_config={
-    data_track_clickback:true,
-    sm:"copy,renren,cqq",
-    pic:"",
-    summary:"",
-    
-  </script> 
-<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
-" charset="utf-8"></script>      
-
-	 </div>
+	  <div data-url="http://takecareofbigboss.github.io/2015/06/20/how-to-use-jacman-theme/" data-title="How to Use Jacman Theme | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  </div>
 	
 	</div>
 
@@ -170,13 +158,86 @@
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ 
+ 
+  </div>
+
 <div id="asidepart">
 <div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Computer-Graphics/" title="Computer Graphics">Computer Graphics<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Deep-Learning/" title="Deep Learning">Deep Learning<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Github/" title="Github">Github<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Latex-Usage/" title="Latex Usage">Latex Usage<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
 
   
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Deep-Learning/" title="Deep Learning">Deep Learning<sup>5</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Github/" title="Github">Github<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Latex-Latex-Module/" title="Latex,Latex Module">Latex,Latex Module<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Deep-Learning-Caffe/" title="Deep Learning,Caffe">Deep Learning,Caffe<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Clustering-Algorithm/" title="Clustering Algorithm">Clustering Algorithm<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Caffe-Usage/" title="Caffe Usage">Caffe Usage<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Caffe-CPU-Cluster-Cent-Os/" title="Caffe,CPU Cluster,Cent Os">Caffe,CPU Cluster,Cent Os<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Yi-Ma/" title="Yi Ma">Yi Ma<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Computer-Graphics-RussianCube/" title="Computer Graphics,RussianCube">Computer Graphics,RussianCube<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
 
   <div class="linkslist">
   <p class="asidetitle">友情鏈接</p>
@@ -327,6 +388,35 @@ $(document).ready(function(){
 </script>
 
 
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
 
 
 <script type="text/javascript">
@@ -372,25 +462,9 @@ $(document).ready(function(){
 
 <!-- Analytics Begin -->
 
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'null', 'null');  
-ga('send', 'pageview');
-</script>
 
 
 
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fnull' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-
-
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_null'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3Dnull' type='text/javascript'%3E%3C/script%3E"));</script>
 
 <!-- Analytics End -->
 
@@ -460,4 +534,4 @@ _ts(option);
 <!-- Tiny_search End -->
 
   </body>
- </html>
+</html>
