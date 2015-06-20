@@ -37,7 +37,7 @@ Before start this tutorial, you should first install pyth">
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../../../css/style.css" type="text/css">
 </head>
 
   <body>
@@ -226,10 +226,10 @@ cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class=
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/28/The-Derivation-about-CNN-and-Antoencoder/" title="The Derivation about CNN and Antoencoder">
+ <a href="/2015/05/28/The-Derivation-about-CNN-and-Antoencoder/" title="The Derivation About CNN and Antoencoder">
   <strong>上一篇：</strong><br/>
   <span>
-  The Derivation about CNN and Antoencoder</span>
+  The Derivation About CNN and Antoencoder</span>
 </a>
 </div>
 
@@ -368,6 +368,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

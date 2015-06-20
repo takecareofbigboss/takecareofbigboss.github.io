@@ -34,7 +34,7 @@ Quick">
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../../../css/style.css" type="text/css">
 </head>
 
   <body>
@@ -138,10 +138,10 @@ Quick">
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/04/10/paper-reading-lists/" title="Paper Reading Lists about Object Detection">
+ <a href="/2015/04/10/paper-reading-lists/" title="Paper Reading Lists About Object Detection">
   <strong>上一篇：</strong><br/>
   <span>
-  Paper Reading Lists about Object Detection</span>
+  Paper Reading Lists About Object Detection</span>
 </a>
 </div>
 
@@ -272,6 +272,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

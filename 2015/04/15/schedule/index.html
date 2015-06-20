@@ -37,7 +37,7 @@ Code Readingefficient graph based segmentation">
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../../../css/style.css" type="text/css">
 </head>
 
   <body>
@@ -144,9 +144,9 @@ edu/~bharath2/pubs/pdfs/BharathECCV2014.pdf" target="_blank" rel="external">Simu
 
 
 <div class="next">
-<a href="/2015/04/10/paper-reading-lists/"  title="Paper Reading Lists about Object Detection">
+<a href="/2015/04/10/paper-reading-lists/"  title="Paper Reading Lists About Object Detection">
  <strong>下一篇：</strong><br/> 
- <span>Paper Reading Lists about Object Detection
+ <span>Paper Reading Lists About Object Detection
 </span>
 </a>
 </div>
@@ -277,6 +277,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

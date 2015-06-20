@@ -62,7 +62,7 @@ Laplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之�
     <link rel="apple-touch-icon" href="/img/jacman.jpg">
     <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
     
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="../../../../css/style.css" type="text/css">
 </head>
 
   <body>
@@ -171,11 +171,19 @@ Laplacian Eigenmaps (LE)&amp;emsp;&amp;emsp;LE算法的思路就是局部点之�
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/06/12/caffe-usage-summarization/" title="Caffe Usage Summarization">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Caffe Usage Summarization</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/2015/06/08/how-to-use-github-blog/"  title="how to use github blog">
+<a href="/2015/06/08/how-to-use-github-blog/"  title="How to Use Github Blog">
  <strong>下一篇：</strong><br/> 
- <span>how to use github blog
+ <span>How to Use Github Blog
 </span>
 </a>
 </div>
@@ -299,6 +307,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 
