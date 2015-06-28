@@ -80,6 +80,62 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/28/深度学习应用的原理/" title="深度学习应用的原理" itemprop="url">深度学习应用的原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-28T08:23:13.000Z" itemprop="datePublished"> 發表於 2015-06-28</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="本文主要解释一些深度学习模型work的原理">本文主要解释一些深度学习模型work的原理</h2><h3 id="CNN模型训练人脸分类效果为什么会好？">CNN模型训练人脸分类效果为什么会好？</h3><p>&emsp;&emsp;一幅图像中，各种复杂的因素往往以非线性的方式结合在一起。例如人脸图像中就包含了身份、姿态、年龄、表情和光线等各种信息。深度学习的关键就是通过多层非线性映射将这些因素成功的分开，例如在深度模型的最后一个隐含层，不同的神经元代表了不同的因素。如果将这个隐含层当作特征表示，人脸识别、姿态估计、表情识别、年龄估计就会变得非常简单，因为各个因素之间变成了简单的线性关系，不再彼此干扰。</p>
+<h3 id="CNN学习针对人脸图像的分层特征表达：">CNN学习针对人脸图像的分层特征表达：</h3><p>&emsp;&emsp;它可以学习针对人脸图像的分层特征表达。最底层可以从原始像素学习滤波器，刻画局部的边缘和纹理特征；通过对各种边缘滤波器进行组合，中层滤波器可以描述不同类型的人脸器官；最高层描述的是整个人脸的全局特征。</p>
+<h3 id="深度学习模型提取全局特征和上下文信息的能力：">深度学习模型提取全局特征和上下文信息的能力：</h3><p>&emsp;&emsp;事实上即使存在局部遮挡的情况下，人眼也可以根据脸部其它区域的信息估计被遮挡处的标注。这意味着全局和上下文的信息对于局部的判断是非常重要的，而这些信息在基于局部特征的方法中从最开始阶段就丢失了。理想的情况下，模型应该将整幅图像作为输入，直接预测整幅分割图。图像分割可以被当作一个高维数据转换的问题来解决。这样不但利用到了上下文信息，模型在高维数据转换过程中也隐式地加入了形状先验。但是由于整幅图像内容过于复杂，浅层模型很难有效地捕捉全局特征。<br>&emsp;&emsp;之所以CNN模型能够学习到全局特征，是因为在每个卷积层和pooling层操作的时候，都是多个pixels转换成一个pixel的过程，这样的话，生成的pixel就可以更好地表征转换前的pixels的特征。即使存在occlusion，CNN也会在最后一层学到occlusion周围信息的features。</p>
+<h3 id="很多应用的训练集是较小的，如何在这种情况下应用深度学习呢？">很多应用的训练集是较小的，如何在这种情况下应用深度学习呢？</h3><p>&emsp;&emsp;可以将ImageNet 上训练得到的模型做为起点，利用目标训练集和反向传播对其进行继续训练，将模型适应到特定的应用[10]。ImageNet 起到预训练的作用。<br>&emsp;&emsp;如果目标训练集不够大，也可以将低层的网络参数固定，沿用ImageNet 上的训练集结果，只对上层进行更新。这是因为底层的网络参数是最难更新的，而从ImageNet 学习得到的底层滤波器往往描述了各种不同的局部边缘和纹理信息，而这些滤波器对一般的图像有较好的普适性。<br>&emsp;&emsp;直接采用ImageNet 上训练得到的模型，把最高的隐含层的输出作为特征表达，代替常用的手工设计的特征[19][20]。</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/28/深度学习应用的原理/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/28/深度学习应用的原理/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/06/20/how-to-use-jacman-theme/" title="How to Use Jacman Theme" itemprop="url">How to Use Jacman Theme</a>
   </h1>
   <p class="article-author">By
@@ -768,71 +824,6 @@ cp /path/<span class="keyword">to</span>/cudnn/*  /str/users/tangxu/<span class=
 	
 	  	<span></span>
 		<a href="/2015/05/19/deep-learning/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/19/deep-learning/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/05/11/RussianCube/" title="RussianCube" itemprop="url">RussianCube</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
-		
-  <p class="article-time">
-    <time datetime="2015-05-11T13:32:58.000Z" itemprop="datePublished"> 發表於 2015-05-11</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h2 id="俄罗斯方块openGL程序：">俄罗斯方块openGL程序：</h2><p>使用本程序需要安装openGL库文件，具体安装教程请看<a href="http://www.cnblogs.com/Linkliu/articles/leanC.html" target="_blank" rel="external">链接</a>。</p>
-<h2 id="俄罗斯方块程序声明：">俄罗斯方块程序声明：</h2><p>由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。</p>
-<p>后期改进也没有什么问题，只不过由于课程比较紧，有很多论文需要看，所以不打算改进了。</p>
-<h2 id="俄罗斯方块程序链接地址"><a href="https://github.com/takecareofbigboss/Russian_cube" target="_blank" rel="external">俄罗斯方块程序链接地址</a></h2>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="categories/Computer-Graphics/">Computer Graphics</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/Computer-Graphics-RussianCube/">Computer Graphics,RussianCube</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/05/11/RussianCube/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/11/RussianCube/" data-count-type="comments">&nbsp;</a>
 	
 </div>
 
