@@ -4,28 +4,22 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>RussianCube | Xu Tang&#39;s Homepages</title>
+    <title>Face Recognition or Verification | Xu Tang&#39;s Homepages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xu Tang">
     
 
     
-    <meta name="description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+    <meta name="description" content="DeepFace:Closing the Gap to Human-Level Performance in Face VerificationDeep Learning Face Representation from Predicting 10,000 Classes&amp;emsp;&amp;emsp;实际上作者就是利用每张人脸的图片，去做成60个patches，每个patch训练一个models，最后一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RussianCube">
-<meta property="og:url" content="http://takecareofbigboss.github.io/2015/05/11/RussianCube/index.html">
+<meta property="og:title" content="Face Recognition or Verification">
+<meta property="og:url" content="http://takecareofbigboss.github.io/2015/06/28/face-recognition-or-verification/index.html">
 <meta property="og:site_name" content="Xu Tang's Homepages">
-<meta property="og:description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+<meta property="og:description" content="DeepFace:Closing the Gap to Human-Level Performance in Face VerificationDeep Learning Face Representation from Predicting 10,000 Classes&amp;emsp;&amp;emsp;实际上作者就是利用每张人脸的图片，去做成60个patches，每个patch训练一个models，最后一">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RussianCube">
-<meta name="twitter:description" content="俄罗斯方块openGL程序：使用本程序需要安装openGL库文件，具体安装教程请看链接。
-俄罗斯方块程序声明：由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。
-后期改进也没有什么问题，只不过由于课程比较紧">
+<meta name="twitter:title" content="Face Recognition or Verification">
+<meta name="twitter:description" content="DeepFace:Closing the Gap to Human-Level Performance in Face VerificationDeep Learning Face Representation from Predicting 10,000 Classes&amp;emsp;&amp;emsp;实际上作者就是利用每张人脸的图片，去做成60个patches，每个patch训练一个models，最后一">
 
     
     <link rel="alternative" href="/atom.xml" title="Xu Tang&#39;s Homepages" type="application/atom+xml">
@@ -84,14 +78,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/05/11/RussianCube/" title="RussianCube" itemprop="url">RussianCube</a>
+      <a href="/2015/06/28/face-recognition-or-verification/" title="Face Recognition or Verification" itemprop="url">Face Recognition or Verification</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Xu Tang" target="_blank" itemprop="author">Xu Tang</a>
 		
   <p class="article-time">
-    <time datetime="2015-05-11T13:32:58.000Z" itemprop="datePublished"> 發表於 2015-05-11</time>
+    <time datetime="2015-06-28T12:12:53.000Z" itemprop="datePublished"> 發表於 2015-06-28</time>
     
   </p>
 </header>
@@ -100,27 +94,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块openGL程序："><span class="toc-number">1.</span> <span class="toc-text">俄罗斯方块openGL程序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序声明："><span class="toc-number">2.</span> <span class="toc-text">俄罗斯方块程序声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序链接地址"><span class="toc-number">3.</span> <span class="toc-text">俄罗斯方块程序链接地址</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DeepFace:Closing_the_Gap_to_Human-Level_Performance_in_Face_Verification"><span class="toc-number">1.</span> <span class="toc-text">DeepFace:Closing the Gap to Human-Level Performance in Face Verification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep_Learning_Face_Representation_from_Predicting_10,000_Classes"><span class="toc-number">2.</span> <span class="toc-text">Deep Learning Face Representation from Predicting 10,000 Classes</span></a></li></ol>
 		
 		</div>
 		
-		<h2 id="俄罗斯方块openGL程序：">俄罗斯方块openGL程序：</h2><p>使用本程序需要安装openGL库文件，具体安装教程请看<a href="http://www.cnblogs.com/Linkliu/articles/leanC.html" target="_blank" rel="external">链接</a>。</p>
-<h2 id="俄罗斯方块程序声明：">俄罗斯方块程序声明：</h2><p>由于本程序选装用的是矩阵相乘进行旋转，因此个别地方会有bug。如果将程序改为直接列举出19种旋转的情况，这些bug会消除。另外，我在程序里面写了很多输出检测的调试代码，因此运行的时候，会有点卡。如果删除所有的命令行输出语句，程序几乎没有bug。</p>
-<p>后期改进也没有什么问题，只不过由于课程比较紧，有很多论文需要看，所以不打算改进了。</p>
-<h2 id="俄罗斯方块程序链接地址"><a href="https://github.com/takecareofbigboss/Russian_cube" target="_blank" rel="external">俄罗斯方块程序链接地址</a></h2>  
+		<h3 id="DeepFace:Closing_the_Gap_to_Human-Level_Performance_in_Face_Verification">DeepFace:Closing the Gap to Human-Level Performance in Face Verification</h3><h3 id="Deep_Learning_Face_Representation_from_Predicting_10,000_Classes">Deep Learning Face Representation from Predicting 10,000 Classes</h3><p>&emsp;&emsp;实际上作者就是利用每张人脸的图片，去做成60个patches，每个patch训练一个models，最后一层是softmax。然后用训练得到的模型提取features，将60个CNN models提取到的features组成一个vector，最后用来训练用于验证的神经网络。</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="../../../../categories/Computer-Graphics/">Computer Graphics</a>
+  <a class="article-category-link" href="../../../../categories/Deep-Learning/">Deep Learning</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Computer-Graphics-RussianCube/">Computer Graphics,RussianCube</a>
+  <span></span> <a href="/tags/Deep-Learning-Face-Recognition-Face-Recognition/">Deep Learning,Face Recognition,Face Recognition</a>
   </div>
 
 </div>
@@ -129,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://takecareofbigboss.github.io/2015/05/11/RussianCube/" data-title="RussianCube | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
+	  <div data-url="http://takecareofbigboss.github.io/2015/06/28/face-recognition-or-verification/" data-title="Face Recognition or Verification | Xu Tang&#39;s Homepages" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,19 +134,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/05/19/deep-learning/" title="Deep Learning for Object Detection and Segmentation">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Deep Learning for Object Detection and Segmentation</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/05/10/VALSE2015/"  title="VALSE2015">
+<a href="/2015/06/28/Yi-Ma-s-Sayings/"  title="Yi Ma&#39;s Sayings">
  <strong>下一篇：</strong><br/> 
- <span>VALSE2015
+ <span>Yi Ma&#39;s Sayings
 </span>
 </a>
 </div>
@@ -163,7 +147,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/05/11/RussianCube/" data-title="RussianCube" data-url="http://takecareofbigboss.github.io/2015/05/11/RussianCube/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/28/face-recognition-or-verification/" data-title="Face Recognition or Verification" data-url="http://takecareofbigboss.github.io/2015/06/28/face-recognition-or-verification/"></div>
 </section>
 
 
@@ -173,7 +157,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块openGL程序："><span class="toc-number">1.</span> <span class="toc-text">俄罗斯方块openGL程序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序声明："><span class="toc-number">2.</span> <span class="toc-text">俄罗斯方块程序声明：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#俄罗斯方块程序链接地址"><span class="toc-number">3.</span> <span class="toc-text">俄罗斯方块程序链接地址</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DeepFace:Closing_the_Gap_to_Human-Level_Performance_in_Face_Verification"><span class="toc-number">1.</span> <span class="toc-text">DeepFace:Closing the Gap to Human-Level Performance in Face Verification</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deep_Learning_Face_Representation_from_Predicting_10,000_Classes"><span class="toc-number">2.</span> <span class="toc-text">Deep Learning Face Representation from Predicting 10,000 Classes</span></a></li></ol>
  
   </div>
 
